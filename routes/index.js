@@ -12,6 +12,7 @@ router.get('/upload', function(req,res, next){
   res.render('uploadfile');
 });
 
+var getPathFile= '';
 router.post('/upload', function(req,res,next){
   //Khởi tạo form
   var form =  new formidable.IncomingForm();
@@ -22,23 +23,25 @@ router.post('/upload', function(req,res,next){
     //path tmp trên server
     var path = file.files.path;
     //thiết lập path mới cho file
-    fs.readFile(path,'utf8',function (err,data) {
-      if (err) throw err;
-      res.send(data);
-    });
     var newpath = form.uploadDir + file.files.name;
     fs.rename(path, newpath, function (err) {
       if (err) throw err;
+      res.render('uploadfile',{success: 'Up load thành công!'})
     });
+    getPathFile = newpath;
   });
+  return;
 });
 
 router.get('/result', function(req,res,next){
-  res.render('result');
-  fs.readFile(newpath,'utf8',function (err,data) {
+  var arr=[];
+  fs.readFile(getPathFile,'utf8',function (err,data) {
     if (err) throw err;
-    res.write(data);
+    data.split("\r\n").map(function(el){
+      arr.push(el.split(" "));
+    });
   });
+  res.render('result',{data: arr});
 });
 
 module.exports = router;

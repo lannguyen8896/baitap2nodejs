@@ -1,1 +1,13 @@
-<h1>abc</h1>
+<table>
+    {{#each data}}
+    <tr>
+        {{#each this}}
+            {{#if this}}
+                <td style="background-color:rgb(255,174,201)">{{ this }}</td>
+            {{!-- {{else}}
+                <td style="background-color: white">{{ this }}</td> --}}
+            {{/if}}
+        {{/each}}
+    </tr>
+    {{/each}}
+</table>

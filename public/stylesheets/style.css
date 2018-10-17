@@ -4,10 +4,15 @@ body {
 }
 
 a {
-  color: black;
+  color: black !important;
   padding: 5px 10px;
-  text-decoration: none;
+  text-decoration: none !important;
   border: 1px solid black;
   border-radius: 3px;
   background: rgb(247, 242, 242);
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px !important;
 }
